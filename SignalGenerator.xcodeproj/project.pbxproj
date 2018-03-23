@@ -14,6 +14,7 @@
 		EE0E36632052B8A500629F36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE0E36612052B8A500629F36 /* LaunchScreen.storyboard */; };
 		EE0E366E2052B8A500629F36 /* SignalGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E366D2052B8A500629F36 /* SignalGeneratorTests.swift */; };
 		EE0E36792052B8A500629F36 /* SignalGeneratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E36782052B8A500629F36 /* SignalGeneratorUITests.swift */; };
+		EED3BB6A2059710800F8BAA3 /* SignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED3BB692059710800F8BAA3 /* SignalGenerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,9 @@
 		EE0E36742052B8A500629F36 /* SignalGeneratorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignalGeneratorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE0E36782052B8A500629F36 /* SignalGeneratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalGeneratorUITests.swift; sourceTree = "<group>"; };
 		EE0E367A2052B8A500629F36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EED3BB682059710700F8BAA3 /* SignalGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignalGenerator.h; sourceTree = "<group>"; };
+		EED3BB692059710800F8BAA3 /* SignalGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignalGenerator.m; sourceTree = "<group>"; };
+		EED3BB6B20626EDB00F8BAA3 /* SignalGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SignalGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,9 @@
 				EE0E365F2052B8A500629F36 /* Assets.xcassets */,
 				EE0E36612052B8A500629F36 /* LaunchScreen.storyboard */,
 				EE0E36642052B8A500629F36 /* Info.plist */,
+				EED3BB692059710800F8BAA3 /* SignalGenerator.m */,
+				EED3BB682059710700F8BAA3 /* SignalGenerator.h */,
+				EED3BB6B20626EDB00F8BAA3 /* SignalGenerator-Bridging-Header.h */,
 			);
 			path = SignalGenerator;
 			sourceTree = "<group>";
@@ -193,6 +200,7 @@
 				TargetAttributes = {
 					EE0E36542052B8A500629F36 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					EE0E36682052B8A500629F36 = {
@@ -261,6 +269,7 @@
 			files = (
 				EE0E365B2052B8A500629F36 /* ViewController.swift in Sources */,
 				EE0E36592052B8A500629F36 /* AppDelegate.swift in Sources */,
+				EED3BB6A2059710800F8BAA3 /* SignalGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,12 +435,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XZ5NJN6Y98;
 				INFOPLIST_FILE = SignalGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hasi6363.SignalGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SignalGenerator/SignalGenerator-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -441,12 +454,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XZ5NJN6Y98;
 				INFOPLIST_FILE = SignalGenerator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hasi6363.SignalGenerator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "SignalGenerator/SignalGenerator-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

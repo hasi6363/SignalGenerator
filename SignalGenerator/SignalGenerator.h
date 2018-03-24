@@ -3,15 +3,14 @@
 
 @interface SignalGenerator : NSObject
 
-@property (nonatomic, readonly) BOOL mIsPlaying;
-@property (nonatomic) Float64 mSampleRate;
-@property (nonatomic) float mFrequency;
-@property (nonatomic) float mCurFreq;
-@property (nonatomic) float mPhase;
+@property (nonatomic, readonly) BOOL isPlaying;
+@property (nonatomic) Float64 sampleRate;
+@property (nonatomic) double frequency;
+@property (nonatomic) double curFreq;
+@property (nonatomic) double phase;
 
 - (void) play;
 - (void) stop;
-- (void) prepareAudioUnit;
 
 @end
 

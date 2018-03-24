@@ -21,34 +21,47 @@
 - (instancetype)init
 {
     self = [super init];
-    [self prepareAudioUnit];
+    [self setup];
 
     return self;
 }
 
 - (void)dealloc
 {
-    if(self.mIsPlaying)AudioOutputUnitStop(mAudioUnit);
+    if(self.isPlaying)AudioOutputUnitStop(mAudioUnit);
     AudioUnitUninitialize(mAudioUnit);
     AudioComponentInstanceDispose(mAudioUnit);
 }
 
 - (void) play
 {
-    if(!self.mIsPlaying)
+    if(!self.isPlaying)
     {
         AudioOutputUnitStart(mAudioUnit);
     }
-    _mIsPlaying = YES;
+    _isPlaying = YES;
 }
 
 - (void) stop
 {
-    if(self.mIsPlaying)
+    if(self.isPlaying)
     {
         AudioOutputUnitStop(mAudioUnit);
     }
-    _mIsPlaying = NO;
+    _isPlaying = NO;
+}
+
+- (void) setFrequency:(double)frequency
+{
+    if(frequency > 20000)
+    {
+        frequency = 20000;
+    }
+    else if(frequency < 1)
+    {
+        frequency = 1;
+    }
+    _frequency = frequency;
 }
 
 /*
@@ -91,10 +104,10 @@
                          sizeof(AudioStreamBasicDescription));
 }
 
-- (void) prepareAudioUnit
+- (void) setup
 {
-    self.mSampleRate = 44100.0;
-    self.mFrequency = 440;
+    self.sampleRate = 44100.0;
+    self.frequency = 440;
     AudioComponentDescription acd =
     {
         .componentType = kAudioUnitType_Output,
@@ -114,7 +127,7 @@
 
     AudioStreamBasicDescription asbd =
     {
-        .mSampleRate = self.mSampleRate,
+        .mSampleRate = self.sampleRate,
         .mFormatID = kAudioFormatLinearPCM,
         .mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved,
         .mBitsPerChannel = 16,
@@ -138,21 +151,21 @@ static OSStatus render_callback(void*                       inRefCon,
     SignalGenerator* def = (__bridge SignalGenerator*)inRefCon;
     SInt16 *outL = ioData->mBuffers[0].mData;
     //SInt16 *outR = ioData->mBuffers[1].mData;
-    float delta;
+    double delta;
     float wave;
     
     for (int i = 0; i< inNumberFrames; i++)
     {
-        def.mCurFreq = 0.001 * def.mFrequency + 0.999 * def.mCurFreq;
-        delta = def.mCurFreq * 2.0 * M_PI / def.mSampleRate;
-        wave = sin(def.mPhase);
+        def.curFreq = 0.001 * def.frequency + 0.999 * def.curFreq;
+        delta = def.curFreq * 2.0 * M_PI / def.sampleRate;
+        wave = sin(def.phase);
         SInt16 data = wave * 0x7FFF;
         outL[i] = data;
         //outR[i] = data;
-        def.mPhase = def.mPhase + delta;
-        if(def.mPhase > 2.0 * M_PI)
+        def.phase = def.phase + delta;
+        if(def.phase > 2.0 * M_PI)
         {
-            def.mPhase -= 2.0 * M_PI;
+            def.phase -= 2.0 * M_PI;
         }
     }
     return noErr;

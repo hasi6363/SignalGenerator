@@ -1,13 +1,10 @@
 #import <Foundation/Foundation.h>
 #import <AudioUnit/AudioUnit.h>
+#import "AudioInfo.h"
 
 @interface SignalGenerator : NSObject
-
 @property (nonatomic, readonly) BOOL isPlaying;
-@property (nonatomic) Float64 sampleRate;
-@property (nonatomic) double frequency;
-@property (nonatomic) double curFreq;
-@property (nonatomic) double phase;
+@property (nonatomic) AudioInfo* audioInfo;
 
 - (void) play;
 - (void) stop;

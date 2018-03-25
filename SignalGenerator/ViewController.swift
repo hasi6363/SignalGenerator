@@ -8,45 +8,91 @@
 
 import UIKit
 
-class ViewController: UIViewController
+class ViewController: UITableViewController, UIGestureRecognizerDelegate
 {
-    //var mIsPlaying:Bool = false
     var sg = SignalGenerator()
-    
-    @IBOutlet weak var mOutlet_Label: UILabel!
-    @IBOutlet weak var mOutlet_Slider: UISlider!
-    @IBOutlet weak var mOutlet_Button: UIButton!
+
+    @IBOutlet weak var mTextField: UITextField!
+    @IBOutlet weak var mSlider: UISlider!
+    @IBOutlet weak var mButton: UIButton!
+    @IBOutlet weak var Stepper: UIStepper!
+    @IBOutlet weak var mTableView: UITableView!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        //mIsPlaying = false;
-        // Do any additional setup after loading the view, typically from a nib.
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard(_:)))
+        tapGesture.cancelsTouchesInView = false
+        tapGesture.delegate = self
+        view.addGestureRecognizer(tapGesture)
+        
+        updateFrequency(frequency:440)
     }
 
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    @IBAction func Action_SliderValueChanged(_ sender: UISlider)
+    
+    @objc func dismissKeyboard(_ sender: UITapGestureRecognizer)
     {
-        sg.mFrequency = 2 * pow(10, sender.value)
-        mOutlet_Label.text = sg.mFrequency.description
+        view.endEditing(true)
     }
-    @IBAction func Action_ButtonTouchUp(_ sender: UIButton)
+
+    func updateFrequency(frequency:Double)
+    {
+        sg.audioInfo.frequency = frequency
+        mTextField.text = Int(sg.audioInfo.frequency).description
+        mSlider.value = log10(Float(sg.audioInfo.frequency) / 2.0)
+        //mSlider.value = Float(sg.mFrequency)
+        Stepper.value = sg.audioInfo.frequency
+    }
+
+    @IBAction func TextField_EditingDidBegin(_ sender: UITextField)
+    {
+        sender.text = Int(sender.text!)?.description
+    }
+
+    @IBAction func TextField_EditingChanged(_ sender: UITextField)
     {
         
-        if(sg.mIsPlaying)
+    }
+    @IBAction func TextField_EditingDidEnd(_ sender: UITextField)
+    {
+        updateFrequency(frequency:  NSString(string: sender.text!).doubleValue)
+    }
+    @IBAction func TextField_DidEndOnExit(_ sender: UITextField)
+    {
+        updateFrequency(frequency:  NSString(string: sender.text!).doubleValue)
+    }
+    @IBAction func mSlider_ValueChanged(_ sender: UISlider)
+    {
+        //updateFrequency(frequency: Double(sender.value))
+        updateFrequency(frequency: Double(2.0*pow(10,sender.value)))
+    }
+
+    @IBAction func Stepper_ValueChanged(_ sender: UIStepper)
+    {
+        if(sender.value - sg.audioInfo.frequency > 0)
         {
-            mOutlet_Button.setTitle("Play", for:UIControlState.normal)
-            //sg.mIsPlaying = false;
+            updateFrequency(frequency: pow(10, log10(sg.audioInfo.frequency) + log10(2) / 3))
+        }
+        else
+        {
+            updateFrequency(frequency: pow(10, log10(sg.audioInfo.frequency) - log10(2) / 3))
+        }
+        
+    }
+    @IBAction func mButton_TouchUpInside(_ sender: UIButton)
+    {
+        if(sg.isPlaying)
+        {
+            mButton.setTitle("Play", for:UIControlState.normal)
             sg.stop()
         }
         else
         {
-            mOutlet_Button.setTitle("Pause", for:UIControlState.normal);
-            //mIsPlaying = true
+            mButton.setTitle("Pause", for:UIControlState.normal);
             sg.play()
         }
     }

@@ -14,6 +14,8 @@
 		EE0E36632052B8A500629F36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE0E36612052B8A500629F36 /* LaunchScreen.storyboard */; };
 		EE0E366E2052B8A500629F36 /* SignalGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E366D2052B8A500629F36 /* SignalGeneratorTests.swift */; };
 		EE0E36792052B8A500629F36 /* SignalGeneratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E36782052B8A500629F36 /* SignalGeneratorUITests.swift */; };
+		EEC655BD2067949F002F53D9 /* RemoteOutputController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC655BC2067949F002F53D9 /* RemoteOutputController.m */; };
+		EEC655C52067E165002F53D9 /* AudioInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC655C42067E165002F53D9 /* AudioInfo.m */; };
 		EED3BB6A2059710800F8BAA3 /* SignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED3BB692059710800F8BAA3 /* SignalGenerator.m */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,10 @@
 		EE0E36742052B8A500629F36 /* SignalGeneratorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignalGeneratorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE0E36782052B8A500629F36 /* SignalGeneratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalGeneratorUITests.swift; sourceTree = "<group>"; };
 		EE0E367A2052B8A500629F36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEC655BB206790FC002F53D9 /* RemoteOutputController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoteOutputController.h; sourceTree = "<group>"; };
+		EEC655BC2067949F002F53D9 /* RemoteOutputController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemoteOutputController.m; sourceTree = "<group>"; };
+		EEC655C32067E164002F53D9 /* AudioInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInfo.h; sourceTree = "<group>"; };
+		EEC655C42067E165002F53D9 /* AudioInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInfo.m; sourceTree = "<group>"; };
 		EED3BB682059710700F8BAA3 /* SignalGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignalGenerator.h; sourceTree = "<group>"; };
 		EED3BB692059710800F8BAA3 /* SignalGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignalGenerator.m; sourceTree = "<group>"; };
 		EED3BB6B20626EDB00F8BAA3 /* SignalGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SignalGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -107,9 +113,13 @@
 				EE0E365F2052B8A500629F36 /* Assets.xcassets */,
 				EE0E36612052B8A500629F36 /* LaunchScreen.storyboard */,
 				EE0E36642052B8A500629F36 /* Info.plist */,
+				EEC655C32067E164002F53D9 /* AudioInfo.h */,
+				EEC655C42067E165002F53D9 /* AudioInfo.m */,
 				EED3BB692059710800F8BAA3 /* SignalGenerator.m */,
 				EED3BB682059710700F8BAA3 /* SignalGenerator.h */,
 				EED3BB6B20626EDB00F8BAA3 /* SignalGenerator-Bridging-Header.h */,
+				EEC655BB206790FC002F53D9 /* RemoteOutputController.h */,
+				EEC655BC2067949F002F53D9 /* RemoteOutputController.m */,
 			);
 			path = SignalGenerator;
 			sourceTree = "<group>";
@@ -268,7 +278,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE0E365B2052B8A500629F36 /* ViewController.swift in Sources */,
+				EEC655C52067E165002F53D9 /* AudioInfo.m in Sources */,
 				EE0E36592052B8A500629F36 /* AppDelegate.swift in Sources */,
+				EEC655BD2067949F002F53D9 /* RemoteOutputController.m in Sources */,
 				EED3BB6A2059710800F8BAA3 /* SignalGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

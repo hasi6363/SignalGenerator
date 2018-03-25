@@ -7,11 +7,11 @@
 //
 
 #import "SignalGenerator.h"
+#import "RemoteOutputController.h"
 
 @interface SignalGenerator ()
 {
-    // member variable
-    AudioUnit mAudioUnit;
+    RemoteOutputController *mOutput;
 }
 
 @end
@@ -21,23 +21,21 @@
 - (instancetype)init
 {
     self = [super init];
-    [self setup];
-
+    _audioInfo = [[AudioInfo alloc] init];
+    _audioInfo.sampleRate = 44100;
+    _audioInfo.frequency = 440;
+    _audioInfo.curFreq = _audioInfo.frequency;
+    
+    mOutput = [[RemoteOutputController alloc] initWithSampleRate: _audioInfo.sampleRate];
+    [mOutput setCallback:render_callback withAudioInfo:(__bridge void*)_audioInfo];
     return self;
-}
-
-- (void)dealloc
-{
-    if(self.isPlaying)AudioOutputUnitStop(mAudioUnit);
-    AudioUnitUninitialize(mAudioUnit);
-    AudioComponentInstanceDispose(mAudioUnit);
 }
 
 - (void) play
 {
     if(!self.isPlaying)
     {
-        AudioOutputUnitStart(mAudioUnit);
+        [mOutput start];
     }
     _isPlaying = YES;
 }
@@ -46,99 +44,9 @@
 {
     if(self.isPlaying)
     {
-        AudioOutputUnitStop(mAudioUnit);
+        [mOutput stop];
     }
     _isPlaying = NO;
-}
-
-- (void) setFrequency:(double)frequency
-{
-    if(frequency > 20000)
-    {
-        frequency = 20000;
-    }
-    else if(frequency < 1)
-    {
-        frequency = 1;
-    }
-    _frequency = frequency;
-}
-
-/*
- 1. mAudioUnitを初期化
-   1-1 AudioComponentDescription acd生成
-   1-2 AudioComponentFindNextからAudioComponentを持ってきて、mAudioUnitをNewする
-   1-3 mAudioUnitをInitする
- 2. mAudioUnitにRenderCallbackプロパティを設定する
-   2-1 AURenderCallbackStructを設定する
-     2-1-1 inputProc: callback関数の指定
-     2-1-2 inputProcRefCon: callback関数の第一引数に渡る変数を指定
- 3. mAudioUnitにStreamFormatを設定する
-   3-1 AudioStreamBasicDescription asbdを設定
- 
- */
-
-- (AudioUnit*) AudioUnit: (AudioUnit*)au setACD:(AudioComponentDescription*)acd
-{
-    AudioComponentInstanceNew(AudioComponentFindNext(NULL, acd), au);
-    AudioUnitInitialize(*au);
-    return au;
-}
-
-- (void) AudioUnit: (AudioUnit*) au setCallbackStruct: (AURenderCallbackStruct*) callback_struct
-{
-    AudioUnitSetProperty(*au,
-                         kAudioUnitProperty_SetRenderCallback,
-                         kAudioUnitScope_Input,
-                         0,
-                         callback_struct,
-                         sizeof(AURenderCallbackStruct));
-}
-- (void) AudioUnit: (AudioUnit*) au setASBD: (AudioStreamBasicDescription*) asbd
-{
-    AudioUnitSetProperty(*au,
-                         kAudioUnitProperty_StreamFormat,
-                         kAudioUnitScope_Input,
-                         0,
-                         asbd,
-                         sizeof(AudioStreamBasicDescription));
-}
-
-- (void) setup
-{
-    self.sampleRate = 44100.0;
-    self.frequency = 440;
-    AudioComponentDescription acd =
-    {
-        .componentType = kAudioUnitType_Output,
-        .componentSubType = kAudioUnitSubType_RemoteIO,
-        .componentManufacturer = kAudioUnitManufacturer_Apple,
-        .componentFlags = 0,
-        .componentFlagsMask = 0
-    };
-    [self AudioUnit:&mAudioUnit setACD: &acd];
-    
-    AURenderCallbackStruct callback_struct =
-    {
-        .inputProc = render_callback,
-        .inputProcRefCon = (__bridge void*)self // Data refered in callback
-    };
-    [self AudioUnit:&mAudioUnit setCallbackStruct:&callback_struct];
-
-    AudioStreamBasicDescription asbd =
-    {
-        .mSampleRate = self.sampleRate,
-        .mFormatID = kAudioFormatLinearPCM,
-        .mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked | kAudioFormatFlagIsNonInterleaved,
-        .mBitsPerChannel = 16,
-        .mChannelsPerFrame = 1,
-        .mFramesPerPacket = 1
-    };
-    asbd.mBytesPerFrame = asbd.mBitsPerChannel / 8 * asbd.mChannelsPerFrame;
-    asbd.mBytesPerPacket = asbd.mBytesPerFrame * asbd.mFramesPerPacket;
-    
-    [self AudioUnit:&mAudioUnit setASBD:&asbd];
-
 }
 
 static OSStatus render_callback(void*                       inRefCon,
@@ -148,27 +56,27 @@ static OSStatus render_callback(void*                       inRefCon,
                                 UInt32                      inNumberFrames,
                                 AudioBufferList*            ioData)
 {
-    SignalGenerator* def = (__bridge SignalGenerator*)inRefCon;
-    SInt16 *outL = ioData->mBuffers[0].mData;
-    //SInt16 *outR = ioData->mBuffers[1].mData;
+    AudioInfo* info = (__bridge AudioInfo*)inRefCon;
+    SInt16 *buffer = ioData->mBuffers[0].mData;
     double delta;
     float wave;
     
     for (int i = 0; i< inNumberFrames; i++)
     {
-        def.curFreq = 0.001 * def.frequency + 0.999 * def.curFreq;
-        delta = def.curFreq * 2.0 * M_PI / def.sampleRate;
-        wave = sin(def.phase);
+        info.curFreq = 0.001 * info.frequency + 0.999 * info.curFreq;
+        delta = info.curFreq * 2.0 * M_PI / info.sampleRate;
+        wave = sin(info.phase);
         SInt16 data = wave * 0x7FFF;
-        outL[i] = data;
-        //outR[i] = data;
-        def.phase = def.phase + delta;
-        if(def.phase > 2.0 * M_PI)
+        buffer[i] = data;
+        info.phase = info.phase + delta;
+        if(info.phase > 2.0 * M_PI)
         {
-            def.phase -= 2.0 * M_PI;
+            info.phase -= 2.0 * M_PI;
         }
     }
     return noErr;
 }
 
 @end
+
+

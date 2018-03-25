@@ -10,5 +10,6 @@
 #define SignalGenerator_Bridging_Header_h
 
 #import "SignalGenerator.h"
+#import "RemoteOutputController.h"
 
 #endif /* SignalGenerator_Bridge_Header_h */

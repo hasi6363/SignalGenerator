@@ -14,9 +14,9 @@
 		EE0E36632052B8A500629F36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE0E36612052B8A500629F36 /* LaunchScreen.storyboard */; };
 		EE0E366E2052B8A500629F36 /* SignalGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E366D2052B8A500629F36 /* SignalGeneratorTests.swift */; };
 		EE0E36792052B8A500629F36 /* SignalGeneratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E36782052B8A500629F36 /* SignalGeneratorUITests.swift */; };
-		EEC655BD2067949F002F53D9 /* RemoteOutputController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC655BC2067949F002F53D9 /* RemoteOutputController.m */; };
-		EEC655C52067E165002F53D9 /* AudioInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EEC655C42067E165002F53D9 /* AudioInfo.m */; };
-		EED3BB6A2059710800F8BAA3 /* SignalGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = EED3BB692059710800F8BAA3 /* SignalGenerator.m */; };
+		EE979CCC20920BB40016AFA8 /* AudioInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EE979CCB20920BB40016AFA8 /* AudioInfo.m */; };
+		EEB05F342090D5020096B093 /* GraphManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB05F332090D5020096B093 /* GraphManager.cpp */; };
+		EED3BB6A2059710800F8BAA3 /* SignalGenerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = EED3BB692059710800F8BAA3 /* SignalGenerator.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,12 +50,12 @@
 		EE0E36742052B8A500629F36 /* SignalGeneratorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignalGeneratorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE0E36782052B8A500629F36 /* SignalGeneratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalGeneratorUITests.swift; sourceTree = "<group>"; };
 		EE0E367A2052B8A500629F36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EEC655BB206790FC002F53D9 /* RemoteOutputController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoteOutputController.h; sourceTree = "<group>"; };
-		EEC655BC2067949F002F53D9 /* RemoteOutputController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemoteOutputController.m; sourceTree = "<group>"; };
-		EEC655C32067E164002F53D9 /* AudioInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInfo.h; sourceTree = "<group>"; };
-		EEC655C42067E165002F53D9 /* AudioInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInfo.m; sourceTree = "<group>"; };
+		EE979CCA20920BB40016AFA8 /* AudioInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInfo.h; sourceTree = "<group>"; };
+		EE979CCB20920BB40016AFA8 /* AudioInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInfo.m; sourceTree = "<group>"; };
+		EEB05F322090D5010096B093 /* GraphManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GraphManager.hpp; sourceTree = "<group>"; };
+		EEB05F332090D5020096B093 /* GraphManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; path = GraphManager.cpp; sourceTree = "<group>"; };
 		EED3BB682059710700F8BAA3 /* SignalGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignalGenerator.h; sourceTree = "<group>"; };
-		EED3BB692059710800F8BAA3 /* SignalGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignalGenerator.m; sourceTree = "<group>"; };
+		EED3BB692059710800F8BAA3 /* SignalGenerator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SignalGenerator.mm; sourceTree = "<group>"; };
 		EED3BB6B20626EDB00F8BAA3 /* SignalGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SignalGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,19 +107,18 @@
 		EE0E36572052B8A500629F36 /* SignalGenerator */ = {
 			isa = PBXGroup;
 			children = (
+				EE979CCA20920BB40016AFA8 /* AudioInfo.h */,
+				EE979CCB20920BB40016AFA8 /* AudioInfo.m */,
+				EEB05F312090D4BD0096B093 /* cpp */,
 				EE0E36582052B8A500629F36 /* AppDelegate.swift */,
 				EE0E365A2052B8A500629F36 /* ViewController.swift */,
 				EE0E365C2052B8A500629F36 /* Main.storyboard */,
 				EE0E365F2052B8A500629F36 /* Assets.xcassets */,
 				EE0E36612052B8A500629F36 /* LaunchScreen.storyboard */,
 				EE0E36642052B8A500629F36 /* Info.plist */,
-				EEC655C32067E164002F53D9 /* AudioInfo.h */,
-				EEC655C42067E165002F53D9 /* AudioInfo.m */,
-				EED3BB692059710800F8BAA3 /* SignalGenerator.m */,
+				EED3BB692059710800F8BAA3 /* SignalGenerator.mm */,
 				EED3BB682059710700F8BAA3 /* SignalGenerator.h */,
 				EED3BB6B20626EDB00F8BAA3 /* SignalGenerator-Bridging-Header.h */,
-				EEC655BB206790FC002F53D9 /* RemoteOutputController.h */,
-				EEC655BC2067949F002F53D9 /* RemoteOutputController.m */,
 			);
 			path = SignalGenerator;
 			sourceTree = "<group>";
@@ -140,6 +139,15 @@
 				EE0E367A2052B8A500629F36 /* Info.plist */,
 			);
 			path = SignalGeneratorUITests;
+			sourceTree = "<group>";
+		};
+		EEB05F312090D4BD0096B093 /* cpp */ = {
+			isa = PBXGroup;
+			children = (
+				EEB05F332090D5020096B093 /* GraphManager.cpp */,
+				EEB05F322090D5010096B093 /* GraphManager.hpp */,
+			);
+			path = cpp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,7 +213,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = hasi6363;
 				TargetAttributes = {
 					EE0E36542052B8A500629F36 = {
@@ -277,11 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE979CCC20920BB40016AFA8 /* AudioInfo.m in Sources */,
+				EEB05F342090D5020096B093 /* GraphManager.cpp in Sources */,
 				EE0E365B2052B8A500629F36 /* ViewController.swift in Sources */,
-				EEC655C52067E165002F53D9 /* AudioInfo.m in Sources */,
 				EE0E36592052B8A500629F36 /* AppDelegate.swift in Sources */,
-				EEC655BD2067949F002F53D9 /* RemoteOutputController.m in Sources */,
-				EED3BB6A2059710800F8BAA3 /* SignalGenerator.m in Sources */,
+				EED3BB6A2059710800F8BAA3 /* SignalGenerator.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,6 +358,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -357,6 +366,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -372,6 +382,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -407,6 +418,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -414,6 +426,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -428,6 +441,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

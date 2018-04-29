@@ -146,7 +146,7 @@
                                                         <action selector="volTextField_Update:" destination="PYG-AT-K0c" eventType="editingDidEndOnExit" id="prz-3B-BVz"/>
                                                     </connections>
                                                 </textField>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-80" stepValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="lls-f4-Y5C">
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-80" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="lls-f4-Y5C">
                                                     <rect key="frame" x="277" y="8" width="94" height="29"/>
                                                     <connections>
                                                         <action selector="volStepper_ValueChanged:" destination="PYG-AT-K0c" eventType="valueChanged" id="fPW-Kn-QSk"/>

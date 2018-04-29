@@ -41,7 +41,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>For use bluetooth device</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>audio loopback</string>
+	<string>For audio loopback</string>
 </dict>
 </plist>

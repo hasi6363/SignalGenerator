@@ -9,5 +9,16 @@
 #ifndef Loopback_h
 #define Loopback_h
 
+#import <Foundation/Foundation.h>
+#import <AudioUnit/AudioUnit.h>
+#import "AudioInfo.h"
+
+@interface Loopback : NSObject
+@property (nonatomic, readonly) BOOL isPlaying;
+@property (nonatomic) AudioInfo* audioInfo;
+
+- (void) start;
+- (void) stop;
+@end
 
 #endif /* Loopback_h */

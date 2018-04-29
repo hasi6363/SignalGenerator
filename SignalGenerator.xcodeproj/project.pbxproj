@@ -8,15 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		EE0E36592052B8A500629F36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E36582052B8A500629F36 /* AppDelegate.swift */; };
-		EE0E365B2052B8A500629F36 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E365A2052B8A500629F36 /* ViewController.swift */; };
+		EE0E365B2052B8A500629F36 /* SignalGenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E365A2052B8A500629F36 /* SignalGenViewController.swift */; };
 		EE0E365E2052B8A500629F36 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE0E365C2052B8A500629F36 /* Main.storyboard */; };
 		EE0E36602052B8A500629F36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE0E365F2052B8A500629F36 /* Assets.xcassets */; };
 		EE0E36632052B8A500629F36 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE0E36612052B8A500629F36 /* LaunchScreen.storyboard */; };
 		EE0E366E2052B8A500629F36 /* SignalGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E366D2052B8A500629F36 /* SignalGeneratorTests.swift */; };
 		EE0E36792052B8A500629F36 /* SignalGeneratorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E36782052B8A500629F36 /* SignalGeneratorUITests.swift */; };
+		EE86638620956DB9003ABDEA /* LoopbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86638520956DB9003ABDEA /* LoopbackViewController.swift */; };
 		EE979CCC20920BB40016AFA8 /* AudioInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = EE979CCB20920BB40016AFA8 /* AudioInfo.m */; };
 		EEB05F342090D5020096B093 /* GraphManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB05F332090D5020096B093 /* GraphManager.cpp */; };
 		EED3BB6A2059710800F8BAA3 /* SignalGenerator.mm in Sources */ = {isa = PBXBuildFile; fileRef = EED3BB692059710800F8BAA3 /* SignalGenerator.mm */; };
+		EEF0D5C82094C05000442412 /* Loopback.mm in Sources */ = {isa = PBXBuildFile; fileRef = EEF0D5C72094C05000442412 /* Loopback.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +41,7 @@
 /* Begin PBXFileReference section */
 		EE0E36552052B8A500629F36 /* SignalGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE0E36582052B8A500629F36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EE0E365A2052B8A500629F36 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EE0E365A2052B8A500629F36 /* SignalGenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalGenViewController.swift; sourceTree = "<group>"; };
 		EE0E365D2052B8A500629F36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EE0E365F2052B8A500629F36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE0E36622052B8A500629F36 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +52,7 @@
 		EE0E36742052B8A500629F36 /* SignalGeneratorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignalGeneratorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE0E36782052B8A500629F36 /* SignalGeneratorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalGeneratorUITests.swift; sourceTree = "<group>"; };
 		EE0E367A2052B8A500629F36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE86638520956DB9003ABDEA /* LoopbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopbackViewController.swift; sourceTree = "<group>"; };
 		EE979CCA20920BB40016AFA8 /* AudioInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInfo.h; sourceTree = "<group>"; };
 		EE979CCB20920BB40016AFA8 /* AudioInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioInfo.m; sourceTree = "<group>"; };
 		EEB05F322090D5010096B093 /* GraphManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GraphManager.hpp; sourceTree = "<group>"; };
@@ -57,6 +60,8 @@
 		EED3BB682059710700F8BAA3 /* SignalGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignalGenerator.h; sourceTree = "<group>"; };
 		EED3BB692059710800F8BAA3 /* SignalGenerator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SignalGenerator.mm; sourceTree = "<group>"; };
 		EED3BB6B20626EDB00F8BAA3 /* SignalGenerator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SignalGenerator-Bridging-Header.h"; sourceTree = "<group>"; };
+		EEF0D5C72094C05000442412 /* Loopback.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Loopback.mm; sourceTree = "<group>"; };
+		EEF0D5C92094C06000442412 /* Loopback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Loopback.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,13 +116,16 @@
 				EE979CCB20920BB40016AFA8 /* AudioInfo.m */,
 				EEB05F312090D4BD0096B093 /* cpp */,
 				EE0E36582052B8A500629F36 /* AppDelegate.swift */,
-				EE0E365A2052B8A500629F36 /* ViewController.swift */,
+				EE0E365A2052B8A500629F36 /* SignalGenViewController.swift */,
+				EE86638520956DB9003ABDEA /* LoopbackViewController.swift */,
 				EE0E365C2052B8A500629F36 /* Main.storyboard */,
 				EE0E365F2052B8A500629F36 /* Assets.xcassets */,
 				EE0E36612052B8A500629F36 /* LaunchScreen.storyboard */,
 				EE0E36642052B8A500629F36 /* Info.plist */,
 				EED3BB692059710800F8BAA3 /* SignalGenerator.mm */,
 				EED3BB682059710700F8BAA3 /* SignalGenerator.h */,
+				EEF0D5C72094C05000442412 /* Loopback.mm */,
+				EEF0D5C92094C06000442412 /* Loopback.h */,
 				EED3BB6B20626EDB00F8BAA3 /* SignalGenerator-Bridging-Header.h */,
 			);
 			path = SignalGenerator;
@@ -286,8 +294,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE979CCC20920BB40016AFA8 /* AudioInfo.m in Sources */,
+				EE86638620956DB9003ABDEA /* LoopbackViewController.swift in Sources */,
 				EEB05F342090D5020096B093 /* GraphManager.cpp in Sources */,
-				EE0E365B2052B8A500629F36 /* ViewController.swift in Sources */,
+				EEF0D5C82094C05000442412 /* Loopback.mm in Sources */,
+				EE0E365B2052B8A500629F36 /* SignalGenViewController.swift in Sources */,
 				EE0E36592052B8A500629F36 /* AppDelegate.swift in Sources */,
 				EED3BB6A2059710800F8BAA3 /* SignalGenerator.mm in Sources */,
 			);

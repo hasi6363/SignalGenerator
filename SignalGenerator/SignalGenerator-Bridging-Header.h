@@ -11,4 +11,5 @@
 
 #import "SignalGenerator.h"
 #import "AudioInfo.h"
+#import "Loopback.h"
 #endif /* SignalGenerator_Bridge_Header_h */

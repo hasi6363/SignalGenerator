@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--SignalGenerator-->
         <scene sceneID="9T9-kD-MaL">
             <objects>
-                <tableViewController id="PYG-AT-K0c" customClass="ViewController" customModule="SignalGenerator" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="SignalGenerator" id="PYG-AT-K0c" customClass="SignalGenViewController" customModule="SignalGenerator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="e89-n4-EXm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,16 +55,15 @@
                                                     </attributedString>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                     <connections>
-                                                        <action selector="TextField_DidEndOnExit:" destination="PYG-AT-K0c" eventType="editingDidEndOnExit" id="O9q-TW-Zfi"/>
-                                                        <action selector="TextField_EditingChanged:" destination="PYG-AT-K0c" eventType="editingChanged" id="5aH-k1-v5W"/>
-                                                        <action selector="TextField_EditingDidBegin:" destination="PYG-AT-K0c" eventType="editingDidBegin" id="ts2-Ns-Ua4"/>
-                                                        <action selector="TextField_EditingDidEnd:" destination="PYG-AT-K0c" eventType="editingDidEnd" id="qlw-Jc-a5U"/>
+                                                        <action selector="freqTextField_EditingDidBegin:" destination="PYG-AT-K0c" eventType="editingDidBegin" id="ts2-Ns-Ua4"/>
+                                                        <action selector="freqTextField_Update:" destination="PYG-AT-K0c" eventType="editingDidEndOnExit" id="gmj-4e-dCn"/>
+                                                        <action selector="freqTextField_Update:" destination="PYG-AT-K0c" eventType="editingDidEnd" id="qlw-Jc-a5U"/>
                                                     </connections>
                                                 </textField>
-                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="440" minimumValue="1" maximumValue="20000" stepValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Wkr-QG-sjc">
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" maximumValue="4" stepValue="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Wkr-QG-sjc">
                                                     <rect key="frame" x="277" y="8" width="94" height="29"/>
                                                     <connections>
-                                                        <action selector="Stepper_ValueChanged:" destination="PYG-AT-K0c" eventType="valueChanged" id="b40-CK-1f9"/>
+                                                        <action selector="freqStepper_ValueChanged:" destination="PYG-AT-K0c" eventType="valueChanged" id="b40-CK-1f9"/>
                                                     </connections>
                                                 </stepper>
                                             </subviews>
@@ -92,7 +91,7 @@
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="2" minValue="0.0" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="Vla-nS-dgs">
                                                     <rect key="frame" x="14" y="11" width="347" height="23"/>
                                                     <connections>
-                                                        <action selector="mSlider_ValueChanged:" destination="PYG-AT-K0c" eventType="valueChanged" id="4LR-zM-bD4"/>
+                                                        <action selector="freqSlider_ValueChanged:" destination="PYG-AT-K0c" eventType="valueChanged" id="4LR-zM-bD4"/>
                                                     </connections>
                                                 </slider>
                                             </subviews>
@@ -106,10 +105,96 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Volume" id="Ku1-N9-YK8">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Bdu-rm-XoM">
+                                        <rect key="frame" x="0.0" y="199.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bdu-rm-XoM" id="TPG-6P-j1L">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volume" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWq-Is-EJy">
+                                                    <rect key="frame" x="20" y="12" width="57.5" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="JP5-3h-CYv"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="dBfs" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nmf-mw-wue">
+                                                    <rect key="frame" x="238" y="11.5" width="35" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="NZb-QE-MoC">
+                                                    <rect key="frame" x="157.5" y="7" width="76.5" height="30"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="0">
+                                                            <attributes>
+                                                                <font key="NSFont" size="14" name=".AppleSystemUIFont"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                    <connections>
+                                                        <action selector="volTextField_EditingDidBegin:" destination="PYG-AT-K0c" eventType="editingDidBegin" id="hCC-5h-kja"/>
+                                                        <action selector="volTextField_Update:" destination="PYG-AT-K0c" eventType="editingDidEnd" id="QqY-7c-p64"/>
+                                                        <action selector="volTextField_Update:" destination="PYG-AT-K0c" eventType="editingDidEndOnExit" id="prz-3B-BVz"/>
+                                                    </connections>
+                                                </textField>
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-80" stepValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="lls-f4-Y5C">
+                                                    <rect key="frame" x="277" y="8" width="94" height="29"/>
+                                                    <connections>
+                                                        <action selector="volStepper_ValueChanged:" destination="PYG-AT-K0c" eventType="valueChanged" id="fPW-Kn-QSk"/>
+                                                    </connections>
+                                                </stepper>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="NZb-QE-MoC" firstAttribute="leading" secondItem="jWq-Is-EJy" secondAttribute="trailing" constant="80" id="1ub-Wk-TGJ"/>
+                                                <constraint firstItem="lls-f4-Y5C" firstAttribute="centerY" secondItem="TPG-6P-j1L" secondAttribute="centerY" id="9cr-pb-PhM"/>
+                                                <constraint firstItem="jWq-Is-EJy" firstAttribute="centerY" secondItem="TPG-6P-j1L" secondAttribute="centerY" id="BbI-Nz-i3T"/>
+                                                <constraint firstItem="lls-f4-Y5C" firstAttribute="leading" secondItem="Nmf-mw-wue" secondAttribute="trailing" constant="4" id="Nku-bv-lfG"/>
+                                                <constraint firstItem="Nmf-mw-wue" firstAttribute="centerY" secondItem="TPG-6P-j1L" secondAttribute="centerY" id="W8T-FD-VPz"/>
+                                                <constraint firstAttribute="trailing" secondItem="lls-f4-Y5C" secondAttribute="trailing" constant="4" id="XAd-af-jVc"/>
+                                                <constraint firstItem="jWq-Is-EJy" firstAttribute="leading" secondItem="TPG-6P-j1L" secondAttribute="leadingMargin" constant="4" id="aiG-5o-Kcg"/>
+                                                <constraint firstItem="Nmf-mw-wue" firstAttribute="leading" secondItem="NZb-QE-MoC" secondAttribute="trailing" constant="4" id="eAM-I1-6K4"/>
+                                                <constraint firstItem="NZb-QE-MoC" firstAttribute="centerY" secondItem="TPG-6P-j1L" secondAttribute="centerY" id="ehk-PC-FeM"/>
+                                                <constraint firstItem="NZb-QE-MoC" firstAttribute="centerY" secondItem="jWq-Is-EJy" secondAttribute="centerY" id="zXz-eY-WRS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="qnR-CS-OVp">
+                                        <rect key="frame" x="0.0" y="243.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qnR-CS-OVp" id="RVm-EQ-Lw8">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-80" maxValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="UNZ-Zv-ZOu">
+                                                    <rect key="frame" x="14" y="11" width="347" height="23"/>
+                                                    <connections>
+                                                        <action selector="volSlider_ValueChanged:" destination="PYG-AT-K0c" eventType="valueChanged" id="po5-z1-n0a"/>
+                                                    </connections>
+                                                </slider>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="UNZ-Zv-ZOu" firstAttribute="top" secondItem="RVm-EQ-Lw8" secondAttribute="topMargin" id="6Zd-G6-VUS"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="UNZ-Zv-ZOu" secondAttribute="trailing" id="Moa-36-wGd"/>
+                                                <constraint firstItem="UNZ-Zv-ZOu" firstAttribute="leading" secondItem="RVm-EQ-Lw8" secondAttribute="leadingMargin" id="i2J-Vs-VcH"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="UNZ-Zv-ZOu" secondAttribute="bottom" id="v5z-av-SBE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="yI9-eS-aes">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="tTe-Jy-jgy">
-                                        <rect key="frame" x="0.0" y="179.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="323.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tTe-Jy-jgy" id="5Hj-HR-0Ge">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -120,7 +205,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <state key="normal" title="Play"/>
                                                     <connections>
-                                                        <action selector="mButton_TouchUpInside:" destination="PYG-AT-K0c" eventType="touchUpInside" id="Ad3-Go-q26"/>
+                                                        <action selector="playButton_TouchUpInside:" destination="PYG-AT-K0c" eventType="touchUpInside" id="Ad3-Go-q26"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -140,18 +225,72 @@
                             <outlet property="delegate" destination="PYG-AT-K0c" id="sFH-gX-mXJ"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" id="oaT-eS-qVa"/>
+                    <tabBarItem key="tabBarItem" title="Generator" id="oaT-eS-qVa"/>
                     <connections>
-                        <outlet property="Stepper" destination="Wkr-QG-sjc" id="YWd-Hg-21h"/>
-                        <outlet property="mButton" destination="faW-Ih-qzH" id="ust-ff-bpE"/>
-                        <outlet property="mSlider" destination="Vla-nS-dgs" id="8h1-Ke-qQr"/>
-                        <outlet property="mTableView" destination="e89-n4-EXm" id="sSa-mi-w0m"/>
-                        <outlet property="mTextField" destination="rpr-IG-3Yf" id="bFB-r7-FmE"/>
+                        <outlet property="freqSlider" destination="Vla-nS-dgs" id="QIn-MH-EeO"/>
+                        <outlet property="freqStepper" destination="Wkr-QG-sjc" id="g8L-xx-sZs"/>
+                        <outlet property="freqTextField" destination="rpr-IG-3Yf" id="Hym-q6-lYU"/>
+                        <outlet property="mainTableView" destination="e89-n4-EXm" id="N8e-Xa-Ahn"/>
+                        <outlet property="playButton" destination="faW-Ih-qzH" id="18y-0h-bpp"/>
+                        <outlet property="volSlider" destination="UNZ-Zv-ZOu" id="Izh-QU-Izc"/>
+                        <outlet property="volStepper" destination="lls-f4-Y5C" id="phh-QZ-NVH"/>
+                        <outlet property="volTextField" destination="NZb-QE-MoC" id="Zm5-I4-AJo"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etl-Ri-Hvw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143" y="133"/>
+            <point key="canvasLocation" x="1158" y="-221"/>
+        </scene>
+        <!--Loopback-->
+        <scene sceneID="a4G-wg-Os0">
+            <objects>
+                <tableViewController title="Loopback" id="7gh-nl-mGC" customClass="LoopbackViewController" customModule="SignalGenerator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="QV3-2I-Aw4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Audio Loopback" id="Kwe-Av-Crk">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="VlG-O2-sdB">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VlG-O2-sdB" id="Vmn-xg-g2j">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75U-fE-agd">
+                                                    <rect key="frame" x="4" y="4" width="367" height="35.5"/>
+                                                    <state key="normal" title="Start"/>
+                                                    <connections>
+                                                        <action selector="StartButton_TouchUpInside:" destination="7gh-nl-mGC" eventType="touchUpInside" id="ntq-qj-UYf"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="75U-fE-agd" secondAttribute="trailing" constant="4" id="AQZ-z9-PeT"/>
+                                                <constraint firstAttribute="bottom" secondItem="75U-fE-agd" secondAttribute="bottom" constant="4" id="P5H-YR-fXt"/>
+                                                <constraint firstItem="75U-fE-agd" firstAttribute="top" secondItem="Vmn-xg-g2j" secondAttribute="top" constant="4" id="WiM-qJ-NBC"/>
+                                                <constraint firstItem="75U-fE-agd" firstAttribute="leading" secondItem="Vmn-xg-g2j" secondAttribute="leading" constant="4" id="rdX-Fe-YRE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="7gh-nl-mGC" id="JsL-ic-gnF"/>
+                            <outlet property="delegate" destination="7gh-nl-mGC" id="y0y-2R-3Gg"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Loopback" id="gjF-uU-q5Z"/>
+                    <connections>
+                        <outlet property="Button" destination="75U-fE-agd" id="vS8-MH-rXq"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eGA-ow-H9U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1158" y="473"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cvI-2L-J8v">
@@ -184,6 +323,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="PYG-AT-K0c" kind="relationship" relationship="viewControllers" id="DJ3-0Y-ZXm"/>
+                        <segue destination="7gh-nl-mGC" kind="relationship" relationship="viewControllers" id="3LN-6K-hRI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ik-dF-Ghk" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -27,7 +27,8 @@
     _audioInfo.sampleRate = 44100;
     _audioInfo.frequency = 440;
     _audioInfo.curFreq = _audioInfo.frequency;
-    
+    _audioInfo.volume = 1.0;
+    _audioInfo.curVolume = 0.0;
     
     AudioComponentDescription acd = [self getACD];
     AudioStreamBasicDescription asbd = [self getASBD:44100];
@@ -42,11 +43,10 @@
     mGraphManager->addNode(OUTPUT_NODE_KEY, &acd);
     mGraphManager->setCallback(OUTPUT_NODE_KEY,&callback);
     mGraphManager->setASBD(OUTPUT_NODE_KEY, &asbd);
-    mGraphManager->setEnableIO(OUTPUT_NODE_KEY, 1);
-    mGraphManager->connect(OUTPUT_NODE_KEY, 1, OUTPUT_NODE_KEY, 0);
     mGraphManager->initialize();
     return self;
 }
+
 - (void) dealloc
 {
     mGraphManager->freeNode();
@@ -79,10 +79,11 @@
     return asbd;
 }
 
-- (void) play
+- (void) start
 {
     if(!self.isPlaying)
     {
+        _audioInfo.curVolume = 0.0;
         mGraphManager->start();
     }
     _isPlaying = YES;
@@ -105,23 +106,27 @@ static OSStatus render_callback(void*                       inRefCon,
                                 AudioBufferList*            ioData)
 {
     AudioInfo* info = (__bridge AudioInfo*)inRefCon;
-    SInt16 *buffer = (SInt16*)(ioData->mBuffers[0].mData);
+    SInt16 *buffer = (SInt16*)(ioData->mBuffers[0].mData);  // buffer to be set data
     double delta;
     float wave;
     
     for (int i = 0; i< inNumberFrames; i++)
     {
         info.curFreq = 0.001 * info.frequency + 0.999 * info.curFreq;
+        info.curVolume = 0.001 * info.volume + 0.999 * info.curVolume;
+        
         delta = info.curFreq * 2.0 * M_PI / info.sampleRate;
-        wave = sin(info.phase);
-        SInt16 data = wave * 0x7FFF;
+        wave = info.curVolume * sin(info.phase);             // make 1 sample from phase
+        
+        SInt16 data = wave * 0x7FFF;        // convert to SInt16
         buffer[i] = data;
-        info.phase = info.phase + delta;
+        info.phase = info.phase + delta;    // update phase
         if(info.phase > 2.0 * M_PI)
         {
             info.phase -= 2.0 * M_PI;
         }
     }
+
     return noErr;
 }
 

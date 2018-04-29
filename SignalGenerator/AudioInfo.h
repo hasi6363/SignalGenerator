@@ -11,5 +11,7 @@
 @property (nonatomic) double frequency;
 @property (nonatomic) double curFreq;
 @property (nonatomic) double phase;
+@property (nonatomic) double volume;
+@property (nonatomic) double curVolume;
 @end
 

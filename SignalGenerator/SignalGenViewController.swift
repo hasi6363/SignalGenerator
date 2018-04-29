@@ -8,20 +8,24 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UIGestureRecognizerDelegate
+class SignalGenViewController: UITableViewController, UIGestureRecognizerDelegate
 {
     var sg = SignalGenerator()
 
-    @IBOutlet weak var mTextField: UITextField!
-    @IBOutlet weak var mSlider: UISlider!
-    @IBOutlet weak var mButton: UIButton!
-    @IBOutlet weak var Stepper: UIStepper!
-    @IBOutlet weak var mTableView: UITableView!
+    @IBOutlet weak var freqTextField: UITextField!
+    @IBOutlet weak var freqSlider: UISlider!
+    @IBOutlet weak var mainTableView: UITableView!
+    @IBOutlet weak var freqStepper: UIStepper!
+    @IBOutlet weak var playButton: UIButton!
+    
+    @IBOutlet weak var volTextField: UITextField!
+    @IBOutlet weak var volStepper: UIStepper!
+    @IBOutlet weak var volSlider: UISlider!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.dismissKeyboard(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SignalGenViewController.dismissKeyboard(_:)))
         tapGesture.cancelsTouchesInView = false
         tapGesture.delegate = self
         view.addGestureRecognizer(tapGesture)
@@ -39,61 +43,89 @@ class ViewController: UITableViewController, UIGestureRecognizerDelegate
         view.endEditing(true)
     }
 
+    
+    //freqTextField
+    func convertToExp(frequency:Double) -> Double
+    {
+        // 2000 -> 3
+        return log10(frequency / 2.0)
+    }
+    
+    func convertToFrequency(exp:Double) ->Double
+    {
+        // 3 -> 2000
+        return 2.0 * pow(10, exp)
+    }
+    
     func updateFrequency(frequency:Double)
     {
         sg.audioInfo.frequency = frequency
-        mTextField.text = Int(sg.audioInfo.frequency).description
-        mSlider.value = log10(Float(sg.audioInfo.frequency) / 2.0)
-        //mSlider.value = Float(sg.mFrequency)
-        Stepper.value = sg.audioInfo.frequency
+        freqTextField.text = Int(sg.audioInfo.frequency).description
+        freqSlider.value = Float(convertToExp(frequency: sg.audioInfo.frequency))
+        freqStepper.value = convertToExp(frequency: sg.audioInfo.frequency)
     }
-
-    @IBAction func TextField_EditingDidBegin(_ sender: UITextField)
+    
+    @IBAction func freqTextField_EditingDidBegin(_ sender: UITextField)
     {
         sender.text = Int(sender.text!)?.description
     }
-
-    @IBAction func TextField_EditingChanged(_ sender: UITextField)
-    {
-        
-    }
-    @IBAction func TextField_EditingDidEnd(_ sender: UITextField)
+    
+    @IBAction func freqTextField_Update(_ sender: UITextField)
     {
         updateFrequency(frequency:  NSString(string: sender.text!).doubleValue)
     }
-    @IBAction func TextField_DidEndOnExit(_ sender: UITextField)
+    @IBAction func freqSlider_ValueChanged(_ sender: UISlider)
     {
-        updateFrequency(frequency:  NSString(string: sender.text!).doubleValue)
+        //updateFrequency(frequency: Double(2.0 * pow(10,sender.value)))
+        updateFrequency(frequency: convertToFrequency(exp: Double(sender.value)))
     }
-    @IBAction func mSlider_ValueChanged(_ sender: UISlider)
+    @IBAction func freqStepper_ValueChanged(_ sender: UIStepper)
     {
-        //updateFrequency(frequency: Double(sender.value))
-        updateFrequency(frequency: Double(2.0*pow(10,sender.value)))
+        updateFrequency(frequency: convertToFrequency(exp: sender.value))
     }
-
-    @IBAction func Stepper_ValueChanged(_ sender: UIStepper)
+    
+    // volTextField
+    func convertToDb(value:Double)->Double
     {
-        if(sender.value - sg.audioInfo.frequency > 0)
-        {
-            updateFrequency(frequency: pow(10, log10(sg.audioInfo.frequency) + log10(2) / 3))
-        }
-        else
-        {
-            updateFrequency(frequency: pow(10, log10(sg.audioInfo.frequency) - log10(2) / 3))
-        }
-        
+        return log10(value) * 20.0
     }
-    @IBAction func mButton_TouchUpInside(_ sender: UIButton)
+    func convertToLinear(db:Double)->Double
+    {
+        return pow(10,db / 20.0);
+    }
+    func updateVolume(volume:Double)
+    {
+        sg.audioInfo.volume = volume
+        volTextField.text = String(format:"%.2f",convertToDb(value: sg.audioInfo.volume))
+        volSlider.value = Float(convertToDb(value: sg.audioInfo.volume))
+        volStepper.value = Double(convertToDb(value: sg.audioInfo.volume))
+    }
+    @IBAction func volTextField_EditingDidBegin(_ sender: UITextField)
+    {
+        //sender.text = Int(sender.text!)?.description
+        sender.text = String(format:"%.2f",Double(sender.text!)!)
+    }
+    @IBAction func volTextField_Update(_ sender: UITextField)
+    {
+        updateVolume(volume: NSString(string: sender.text!).doubleValue)
+    }
+    @IBAction func volSlider_ValueChanged(_ sender: UISlider) {
+        updateVolume(volume: convertToLinear(db: Double(sender.value)))
+    }
+    @IBAction func volStepper_ValueChanged(_ sender: UIStepper) {
+        updateVolume(volume:convertToLinear(db: Double(sender.value)))
+    }
+    @IBAction func playButton_TouchUpInside(_ sender: UIButton)
     {
         if(sg.isPlaying)
         {
-            mButton.setTitle("Play", for:UIControlState.normal)
+            playButton.setTitle("Play", for:UIControlState.normal)
             sg.stop()
         }
         else
         {
-            mButton.setTitle("Pause", for:UIControlState.normal);
-            sg.play()
+            playButton.setTitle("Pause", for:UIControlState.normal);
+            sg.start()
         }
     }
 }

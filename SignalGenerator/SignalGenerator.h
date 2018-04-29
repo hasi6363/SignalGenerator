@@ -15,8 +15,7 @@
 @interface SignalGenerator : NSObject
 @property (nonatomic, readonly) BOOL isPlaying;
 @property (nonatomic) AudioInfo* audioInfo;
-
-- (void) play;
+- (void) start;
 - (void) stop;
 @end
 
